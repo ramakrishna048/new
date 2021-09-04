@@ -1,0 +1,22 @@
+---
+- name: Download jar file
+  hosts: local
+  tasks:
+    - name: Install PIP
+      become: yes
+      apt:
+        name: pip
+        state: present
+
+    - name: Install lxml
+      become: yes
+      pip: 
+        name: lxml
+    - name: downloading from git repo
+      maven_artifact:
+        group_id: ngame
+        artifact_id: new-game
+        extension: jar
+        repository_url: https://github.com/ramakrishna048/new.git
+        dest: /home/ubuntu/
+        keep_name: yes
